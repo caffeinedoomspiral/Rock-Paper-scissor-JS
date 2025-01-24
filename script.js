@@ -28,30 +28,38 @@ let playerScore = 0
 
 function playRound(computerChoice, playerChoice) {
     if (computerChoice === playerChoice) {
-        console.log (`It's a tie. You both chose ${playerChoice}.`)
+        console.log (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nIt's a tie, you both chose ${playerChoice}.\n\n`)
+        console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
         return  
     }  else if (
         (computerChoice === "rock" && playerChoice === "paper") ||
         (computerChoice === "paper" && playerChoice === "scissors") ||
         (computerChoice === "scissors" && playerChoice === "rock")
      ) {
-        console.log (`Your choice: ${playerChoice}\nComputer's choice: ${computerChoice}\n\nYou win this round, ${playerChoice} beats ${computerChoice}!`)
-        return playerScore += 1
+        console.log (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nYou win this round, ${playerChoice} beats ${computerChoice}!\n\n`)
+        playerScore += 1
+        console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
     }  else {
-        console.log (`Your choice: ${playerChoice}\nComputer's choice: ${computerChoice}\n\nYou lose this round, ${computerChoice} beats ${playerChoice}.`)
-        return computerScore += 1 
+        console.log (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nYou lose this round, ${computerChoice} beats ${playerChoice}.\n\n`)
+        computerScore += 1 
+        console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
     }
 }
 
 // 5. Write the logic to play the entire game.
 
+let keepPlaying = true
 
-
-
-console.log (`${playerScore}`)
-console.log (`${computerScore}`)
-console.log (`${computerChoice}`)
-console.log (`${playerChoice}`)
-console.log (playRound(computerChoice, playerChoice))
-console.log (`${playerScore}`)
-console.log (`${computerScore}`)
+while (keepPlaying) {
+    let computerChoice = getcomputerChoice()
+    let playerChoice = prompt("Make your choice, write 'Rock', 'Paper' or 'Scissors'.").toLowerCase();
+    console.log (playRound(computerChoice, playerChoice))
+    if (computerScore === 3 || playerScore === 3) {
+        keepPlaying = false
+        if (computerScore === 3) {
+            console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}\n\nThe computer wins!`)
+        } else {
+            console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}\n\nYou win!`)
+        }
+    }
+}
