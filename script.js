@@ -13,53 +13,56 @@ let getcomputerChoice = function () {
     }
 }
 
-let computerChoice = getcomputerChoice()
+// 2. Write the logic to get the player's choice and start the round;
 
-// 2. Write the logic to get the player's choice;
-
-let playerChoice = prompt("Make your choice, write 'Rock', 'Paper' or 'Scissors'.").toLowerCase();
+const playRound = document.querySelector('#playRound')
+playRound.addEventListener ('click', () => {
+  let playerChoice = prompt("Make your choice, write 'Rock', 'Paper' or 'Scissors'.").toLowerCase()
+  let computerChoice = getcomputerChoice()
+  playRound(computerChoice, playerChoice)
+})
 
 // 3. Declare the players score variables;
 
 let computerScore = 0
 let playerScore = 0
 
-// 4. Write the logic to play a single round;
+// 4. Write the logic to play;
 
-function playRound(computerChoice, playerChoice) {
+function playRound(computerChoice, playerChoice) { 
+    // Check for a tie:
     if (computerChoice === playerChoice) {
-        console.log (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nIt's a tie, you both chose ${playerChoice}.\n\n`)
-        console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
-        return  
+      alert (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nIt's a tie, you both chose ${playerChoice}.\n\n`)
+      alert (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
+      return  
+
+    // Check for round winner:
     }  else if (
-        (computerChoice === "rock" && playerChoice === "paper") ||
-        (computerChoice === "paper" && playerChoice === "scissors") ||
-        (computerChoice === "scissors" && playerChoice === "rock")
-     ) {
-        console.log (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nYou win this round, ${playerChoice} beats ${computerChoice}!\n\n`)
-        playerScore += 1
-        console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
+      (computerChoice === "rock" && playerChoice === "paper") ||
+      (computerChoice === "paper" && playerChoice === "scissors") ||
+      (computerChoice === "scissors" && playerChoice === "rock")
+    ) {
+      alert (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nYou win this round, ${playerChoice} beats ${computerChoice}!\n\n`)
+      playerScore += 1
+      alert (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
     }  else {
-        console.log (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nYou lose this round, ${computerChoice} beats ${playerChoice}.\n\n`)
-        computerScore += 1 
-        console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
+      alert (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nYou lose this round, ${computerChoice} beats ${playerChoice}.\n\n`)
+      computerScore += 1 
+      alert (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}`)
     }
-}
 
-// 5. Write the logic to play the entire game.
-
-let keepPlaying = true
-
-while (keepPlaying) {
-    let computerChoice = getcomputerChoice()
-    let playerChoice = prompt("Make your choice, write 'Rock', 'Paper' or 'Scissors'.").toLowerCase();
-    console.log (playRound(computerChoice, playerChoice))
-    if (computerScore === 3 || playerScore === 3) {
-        keepPlaying = false
-        if (computerScore === 3) {
-            console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}\n\nThe computer wins!`)
-        } else {
-            console.log (`Your score: ${playerScore}\n\nComputer's score: ${computerScore}\n\nYou win!`)
-        }
+    // Check for winner:
+    if (computerScore === 5 || playerScore === 5) {
+      if (computerScore === 5) {
+        alert (`The computer wins!`)
+      } 
+      else {
+        alert (`You win!`)
+      }
+      
+      // Reset scores:
+      computerScore = 0
+      playerScore = 0
+      return
     }
-}
+  }
