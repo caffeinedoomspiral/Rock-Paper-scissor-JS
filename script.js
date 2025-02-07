@@ -19,7 +19,7 @@ const playRound = document.querySelector('#playRound')
 playRound.addEventListener ('click', () => {
   let playerChoice = prompt("Make your choice, write 'Rock', 'Paper' or 'Scissors'.").toLowerCase()
   let computerChoice = getcomputerChoice()
-  playRound(computerChoice, playerChoice)
+  playGame(computerChoice, playerChoice)
 })
 
 // 3. Declare the players score variables;
@@ -29,7 +29,7 @@ let playerScore = 0
 
 // 4. Write the logic to play;
 
-function playRound(computerChoice, playerChoice) { 
+function playGame(computerChoice, playerChoice) { 
     // Check for a tie:
     if (computerChoice === playerChoice) {
       alert (`Your choice: ${playerChoice}\n\nComputer's choice: ${computerChoice}\n\nIt's a tie, you both chose ${playerChoice}.\n\n`)
